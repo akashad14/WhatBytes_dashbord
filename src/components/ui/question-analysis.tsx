@@ -43,7 +43,7 @@ export function QuestionAnalysis() {
           {score < 12 ? " Needs improvement." : " Good job!"}
         </p>
         <div className="mt-4 flex items-center justify-center">
-          <div className="relative h-40 w-40">
+          <div className="relative h-60 w-60 pt-10">
             <svg className="h-full w-full -rotate-90" viewBox="0 0 100 100">
               {/* Segment 1 - Lightest blue */}
               <circle
@@ -91,7 +91,7 @@ export function QuestionAnalysis() {
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-2xl font-bold">{percentage.toFixed(0)}%</span>
+              <span className="text-3xl font-bold pt-8">{percentage.toFixed(0)}%</span>
             </div>
           </div>
         </div>

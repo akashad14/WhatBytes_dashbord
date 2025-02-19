@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -22,11 +21,39 @@ export function UpdateDialog({
     percentile: "",
     score: "",
   })
+  const [errors, setErrors] = useState({
+    percentile: "",
+    score: "",
+  })
+
+  const validateForm = () => {
+    let isValid = true
+    const newErrors = { percentile: "", score: "" }
+
+    // Validate percentile (0 to 100)
+    const percentileValue = Number(formData.percentile)
+    if (isNaN(percentileValue) || percentileValue < 0 || percentileValue > 100) {
+      newErrors.percentile = "Percentile must be between 0 and 100."
+      isValid = false
+    }
+
+    // Validate score (0 to 15)
+    const scoreValue = Number(formData.score)
+    if (isNaN(scoreValue) || scoreValue < 0 || scoreValue > 15) {
+      newErrors.score = "Score must be between 0 and 15."
+      isValid = false
+    }
+
+    setErrors(newErrors)
+    return isValid
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    updateScores(Number(formData.rank), Number(formData.percentile), Number(formData.score))
-    onOpenChange(false)
+    if (validateForm()) {
+      updateScores(Number(formData.rank), Number(formData.percentile), Number(formData.score))
+      onOpenChange(false)
+    }
   }
 
   return (
@@ -72,6 +99,9 @@ export function UpdateDialog({
                   max="100"
                   required
                 />
+                {errors.percentile && (
+                  <p className="text-sm text-red-500">{errors.percentile}</p>
+                )}
               </div>
             </div>
 
@@ -90,6 +120,9 @@ export function UpdateDialog({
                   max="15"
                   required
                 />
+                {errors.score && (
+                  <p className="text-sm text-red-500">{errors.score}</p>
+                )}
               </div>
             </div>
           </div>
@@ -105,4 +138,3 @@ export function UpdateDialog({
     </Dialog>
   )
 }
-

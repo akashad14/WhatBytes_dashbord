@@ -10,9 +10,9 @@ export function QuickStats() {
   const { rank, percentile, score } = useScoreStore()
 
   return (
-    <div>
-      <h3 className="text-lg font-semibold mb-4">Quick Statistics</h3>
-      <div className="grid gap-4 md:grid-cols-3">
+    <div className="rounded-lg border bg-card">
+      <h3 className="text-lg font-semibold mb-4 mx-4 pt-4">Quick Statistics</h3>
+      <div className="grid gap-4 p-4 md:grid-cols-2">
         <StatCard icon={Trophy} label="YOUR RANK" value={rank.toString()} className="bg-yellow-50 text-yellow-900" />
         <StatCard icon={ChartBar} label="PERCENTILE" value={`${percentile}%`} className="bg-blue-50 text-blue-900" />
         <StatCard
@@ -39,8 +39,8 @@ function StatCard({
 }) {
   return (
     <Card>
-      <CardContent className="flex items-center gap-4 p-6">
-        <div className={`rounded-full p-2 ${className}`}>
+      <CardContent className="flex items-center gap-6 p-6">
+        <div className={`rounded-full p- ${className}`}>
           <Icon className="h-6 w-6" />
         </div>
         <div>
